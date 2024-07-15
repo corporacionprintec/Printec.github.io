@@ -1,3 +1,6 @@
+html {
+    height: 100%;
+}
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #48A1BE, #091F8D);
