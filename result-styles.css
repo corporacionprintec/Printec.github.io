@@ -1,0 +1,188 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container-received {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+header button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+.detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.detail label {
+    font-weight: bold;
+}
+
+.detail p {
+    margin: 0;
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.audio-controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+.audio-controls audio {
+    width: 100%;
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.container-newform h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    font-size: 20px;
+    cursor: pointer;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.section .content {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.barra,
+.input-group,
+.inspection-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.barra label,
+.input-group label,
+.inspection-item label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.barra input[type="range"],
+.input-group select,
+.input-group input[type="text"],
+.input-group input[type="number"],
+.inspection-item select,
+.inspection-item input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.barra .options,
+.inspection-item .options {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 5px;
+}
+
+.barra .options input,
+.inspection-item .options input {
+    margin-right: 5px;
+}
+
+.barra .options label,
+.inspection-item .options label {
+    margin-right: 15px;
+}
+
+.inspection-item select {
+    margin-bottom: 10px;
+}
+
+.inspection-item input[type="text"] {
+    margin-top: 5px;
+}
+
+/* Estilos adicionales para la sección "solución tecnológica" */
+.solution-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.solution-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.solution-group select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.solution-group input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
