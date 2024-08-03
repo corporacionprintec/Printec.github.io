@@ -1,10 +1,13 @@
+html {
+    min-height: 100%;
+}
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #48A1BE, #091F8D);
     color: #fff;
     text-align: center;
     margin: 0;
-    padding-bottom: 40px;
+    min-height: 100%;
 }
 
 header {
