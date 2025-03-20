@@ -158,26 +158,3 @@ function downloadPDF() {
   html2pdf().set(opt).from(element).save();
 }
 
-/*
-  Para que los elementos de tipo "range" (barras) se muestren en el PDF de forma gráfica,
-  agrega en tu CSS (o en una etiqueta <style> en el head) reglas específicas, por ejemplo:
-
-  input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 8px;
-    background: #ddd;
-    border-radius: 5px;
-    outline: none;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    background: #007bff;
-    cursor: pointer;
-    border-radius: 50%;
-  }
-
-  Estos estilos ayudarán a que se renderice la barra y su pulgar en el PDF y no solo el valor numérico.
-*/
