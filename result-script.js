@@ -1,27 +1,25 @@
 /**
  * Global variables
  */
-let isEditing = false; // Editing state
+let isEditing = false; // Estado de edición
 let isAddingHistory = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Add event listeners to buttons after the DOM is fully loaded
-  document
-    .getElementById("editButton")
-    .addEventListener("click", enableEditing);
-  document
-    .getElementById("addHistoryButton")
-    .addEventListener("click", showForm);
+  // Agregar event listeners a los botones después de cargar el DOM
+  document.getElementById("editButton").addEventListener("click", enableEditing);
+  document.getElementById("addHistoryButton").addEventListener("click", showForm);
   document.querySelector(".submit-button").addEventListener("click", printPage);
+  // Agregar listener para el botón de descargar PDF
+  document.getElementById("downloadPDFButton").addEventListener("click", downloadPDF);
 });
 
 /**
- * Function to show the new form container for adding history
+ * Función para mostrar el contenedor del nuevo formulario (Agregar Historial)
  */
 function showForm() {
   document.getElementById("newFormContainer").style.display = "block";
-  isAddingHistory = true; // Set adding history state to true
-  // Show the submit button when the form is shown
+  isAddingHistory = true; // Establece el estado de agregar historial en true
+  // Muestra el botón de imprimir cuando se muestra el formulario
   const submitButton = document.getElementById("submitButton");
   if (submitButton) {
     submitButton.style.display = "block";
@@ -29,8 +27,8 @@ function showForm() {
 }
 
 /**
- * Function to toggle the visibility of a section
- * @param {string} sectionId - The ID of the section to toggle
+ * Función para alternar la visibilidad de una sección
+ * @param {string} sectionId - ID de la sección a alternar
  */
 function toggleSection(sectionId) {
   const section = document.getElementById(sectionId);
@@ -41,7 +39,7 @@ function toggleSection(sectionId) {
 }
 
 /**
- * Function to enable editing of client details
+ * Función para habilitar la edición de los detalles del cliente
  */
 function enableEditing() {
   const detailFields = [
@@ -63,22 +61,22 @@ function enableEditing() {
     fieldElement.replaceWith(input);
   });
 
-  // Change the Edit button to a Save button
+  // Cambia el botón de Editar por uno de Guardar
   const editButton = document.getElementById("editButton");
   editButton.innerText = "Guardar";
   editButton.removeEventListener("click", enableEditing);
   editButton.addEventListener("click", saveEdits);
 
-  isEditing = true; // Set editing state to true
+  isEditing = true; // Establece el estado de edición en true
 
-  // Ensure the form container remains visible if adding history
+  // Si no se está agregando historial, oculta el contenedor del formulario
   if (!isAddingHistory) {
     document.getElementById("newFormContainer").style.display = "none";
   }
 }
 
 /**
- * Function to save edits made to the client details
+ * Función para guardar las ediciones realizadas
  */
 function saveEdits() {
   const detailFields = [
@@ -99,39 +97,87 @@ function saveEdits() {
     input.replaceWith(p);
   });
 
-  // Change the Save button back to an Edit button
+  // Cambia el botón de Guardar de vuelta a Editar
   const editButton = document.getElementById("editButton");
   editButton.innerText = "Editar";
   editButton.removeEventListener("click", saveEdits);
   editButton.addEventListener("click", enableEditing);
 
-  isEditing = false; // Set editing state to false
+  isEditing = false; // Estado de edición en false
 
-  // Show the submit button when edits are saved
+  // Muestra el botón de imprimir al guardar las ediciones
   const submitButton = document.getElementById("submitButton");
   if (submitButton) {
     submitButton.style.display = "block";
   }
 
-  // Ensure the form container remains visible if adding history
+  // Si no se está agregando historial, oculta el contenedor del formulario
   if (!isAddingHistory) {
     document.getElementById("newFormContainer").style.display = "none";
   }
 }
 
 /**
- * Function to print the page
- * @param {Event} event - The event triggered by form submission
+ * Función para imprimir la página
+ * @param {Event} event - Evento del formulario
  */
 function printPage(event) {
   event.preventDefault();
 
-  // Check if in editing mode
+  // Verifica si se está en modo edición
   if (isEditing) {
     alert("Primero debe guardar los datos editados del cliente.");
     return;
   }
 
-  console.log("Printing page...");
+  console.log("Imprimiendo página...");
   window.print();
 }
+
+/**
+ * Función para descargar el contenido actual en formato PDF
+ */
+function downloadPDF() {
+  // Selecciona el contenedor principal que engloba todo el contenido
+  const element = document.querySelector(".container-received");
+
+  // Opciones para la conversión a PDF.
+  // Se incluye la propiedad pagebreak para evitar cortes abruptos,
+  // y se recomienda incluir en el CSS (de impresión) estilos para los input[type="range"]
+  // de modo que se muestren las barras gráficas.
+  const opt = {
+    margin: 0.5,
+    filename: "formulario_modificado.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    pagebreak: { mode: ["avoid-all", "css", "legacy"] }
+  };
+
+  // Genera y descarga el PDF usando html2pdf
+  html2pdf().set(opt).from(element).save();
+}
+
+/*
+  Para que los elementos de tipo "range" (barras) se muestren en el PDF de forma gráfica,
+  agrega en tu CSS (o en una etiqueta <style> en el head) reglas específicas, por ejemplo:
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #007bff;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  Estos estilos ayudarán a que se renderice la barra y su pulgar en el PDF y no solo el valor numérico.
+*/

@@ -1,50 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Formulario</title>
-    <link rel="stylesheet" href="result-styles.css">
-    <script src="result-script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles del Formulario</title>
+  <link rel="stylesheet" href="result-styles.css">
+  <!-- Incluir la librería html2pdf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <script src="result-script.js" defer></script>
+  <style>
+    /* Puedes mantener tus estilos existentes en result-styles.css y definir aquí lo que necesites extra */
+    /* Ejemplo para el botón Descargar PDF */
+    #downloadPDFButton {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      display: none; /* Oculto por defecto */
+    }
+    #downloadPDFButton:hover {
+      background-color: #0056b3;
+    }
+    
+  </style>
 </head>
 <body>
   <main class="container-received">
     <header>
-        <h1 id="detailTitle">DATOS DEL CLIENTE</h1>
-        <button id="editButton">Editar</button>
+      <h1 id="detailTitle">DATOS DEL CLIENTE</h1>
+      <button id="editButton">Editar</button>
     </header>
     <section>
-        <div class="detail">
-            <label for="fullName">Nombre completo:</label>
-            <p id="fullName">nombre del cliente</p>
-        </div>
-        <div class="detail">
-            <label for="dni">DNI:</label>
-            <p id="dni">dni del cliente</p>
-        </div>
-        <div class="detail">
-            <label for="celular">Celular:</label>
-            <p id="celular">celular del cliente</p>
-        </div>
-        <div class="detail">
-            <label for="date">Fecha:</label>
-            <p id="date">fecha actual</p>
-        </div>
-        <div class="detail">
-            <label for="brandAndModel">Marca y Modelo:</label>
-            <p id="brandAndModel">marca y modelo de la impresora</p>
-        </div>
-        <div class="detail" id="summary-content">
-            <label for="summary">Resumen:</label>
-            <p id="summary">resumen del problema de la impresora</p>
-        </div>
+      <div class="detail">
+        <label for="fullName">Nombre completo:</label>
+        <p id="fullName">nombre del cliente</p>
+      </div>
+      <div class="detail">
+        <label for="dni">DNI:</label>
+        <p id="dni">dni del cliente</p>
+      </div>
+      <div class="detail">
+        <label for="celular">Celular:</label>
+        <p id="celular">celular del cliente</p>
+      </div>
+      <div class="detail">
+        <label for="date">Fecha:</label>
+        <p id="date">fecha actual</p>
+      </div>
+      <div class="detail">
+        <label for="brandAndModel">Marca y Modelo:</label>
+        <p id="brandAndModel">marca y modelo de la impresora</p>
+      </div>
+      <div class="detail" id="summary-content">
+        <label for="summary">Resumen:</label>
+        <p id="summary">resumen del problema de la impresora</p>
+      </div>
     </section>
     
     <section class="audio-controls">
-        <button id="downloadAudio" style="display: none;">Descargar Audio</button>
-        <audio id="audioPlayer" controls style="display: none;">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
+      <button id="downloadAudio" style="display: none;">Descargar Audio</button>
+      <audio id="audioPlayer" controls style="display: none;">
+        Tu navegador no soporta el elemento de audio.
+      </audio>
     </section>
 
     <button id="addHistoryButton">Agregar Historial</button>
@@ -56,372 +77,367 @@
         <h2 onclick="toggleSection('tinta')">Inspección de tinta, cabezal y presión</h2>
         <div id="tinta" class="content">
           <div class="barra">
-              <label for="negro">Negro</label>
-              <input type="range" id="negro" name="negro" min="0" max="100" value="50">
-              <div class="options">
-                  <input type="radio" id="uv_negro" name="tipo_negro" value="UV" checked>
-                  <label for="uv_negro">UV</label>
-                  <input type="radio" id="pig_negro" name="tipo_negro" value="PIG">
-                  <label for="pig_negro">PIG</label>
-              </div>
-              <input type="text" name="observacion_calidad" placeholder="Observaciones">
+            <label for="negro">Negro</label>
+            <input type="range" id="negro" name="negro" min="0" max="100" value="50">
+            <div class="options">
+              <input type="radio" id="uv_negro" name="tipo_negro" value="UV" checked>
+              <label for="uv_negro">UV</label>
+              <input type="radio" id="pig_negro" name="tipo_negro" value="PIG">
+              <label for="pig_negro">PIG</label>
+            </div>
+            <input type="text" name="observacion_calidad" placeholder="Observaciones">
           </div>
-            <div class="barra">
-                <label for="amarillo">Amarillo</label>
-                <input type="range" id="amarillo" name="amarillo" min="0" max="100" value="50">
-                <div class="options">
-                    <input type="radio" id="uv_amarillo" name="tipo_amarillo" value="UV" checked>
-                    <label for="uv_amarillo">UV</label>
-                    <input type="radio" id="pig_amarillo" name="tipo_amarillo" value="PIG">
-                    <label for="pig_amarillo">PIG</label>
-                </div>
-                <input type="text" name="observacion_calidad" placeholder="Observaciones">
+          <div class="barra">
+            <label for="amarillo">Amarillo</label>
+            <input type="range" id="amarillo" name="amarillo" min="0" max="100" value="50">
+            <div class="options">
+              <input type="radio" id="uv_amarillo" name="tipo_amarillo" value="UV" checked>
+              <label for="uv_amarillo">UV</label>
+              <input type="radio" id="pig_amarillo" name="tipo_amarillo" value="PIG">
+              <label for="pig_amarillo">PIG</label>
             </div>
-            <div class="barra">
-                <label for="cyan">Cyan</label>
-                <input type="range" id="cyan" name="cyan" min="0" max="100" value="50">
-                <div class="options">
-                    <input type="radio" id="uv_cyan" name="tipo_cyan" value="UV" checked>
-                    <label for="uv_cyan">UV</label>
-                    <input type="radio" id="pig_cyan" name="tipo_cyan" value="PIG">
-                    <label for="pig_cyan">PIG</label>
-                </div>
-                <input type="text" name="observacion_calidad" placeholder="Observaciones">
+            <input type="text" name="observacion_calidad" placeholder="Observaciones">
+          </div>
+          <div class="barra">
+            <label for="cyan">Cyan</label>
+            <input type="range" id="cyan" name="cyan" min="0" max="100" value="50">
+            <div class="options">
+              <input type="radio" id="uv_cyan" name="tipo_cyan" value="UV" checked>
+              <label for="uv_cyan">UV</label>
+              <input type="radio" id="pig_cyan" name="tipo_cyan" value="PIG">
+              <label for="pig_cyan">PIG</label>
             </div>
-            <div class="barra">
-                <label for="magenta">Magenta</label>
-                <input type="range" id="magenta" name="magenta" min="0" max="100" value="50">
-                <div class="options">
-                    <input type="radio" id="uv_magenta" name="tipo_magenta" value="UV" checked>
-                    <label for="uv_magenta">UV</label>
-                    <input type="radio" id="pig_magenta" name="tipo_magenta" value="PIG">
-                    <label for="pig_magenta">PIG</label>
-                </div>
-                <input type="text" name="observacion_calidad" placeholder="Observaciones">
+            <input type="text" name="observacion_calidad" placeholder="Observaciones">
+          </div>
+          <div class="barra">
+            <label for="magenta">Magenta</label>
+            <input type="range" id="magenta" name="magenta" min="0" max="100" value="50">
+            <div class="options">
+              <input type="radio" id="uv_magenta" name="tipo_magenta" value="UV" checked>
+              <label for="uv_magenta">UV</label>
+              <input type="radio" id="pig_magenta" name="tipo_magenta" value="PIG">
+              <label for="pig_magenta">PIG</label>
             </div>
-            <div class="input-group">
-                <label for="calidad">Calidad</label>
-                <select id="calidad" name="calidad">
-                    <option value="bueno">Bueno</option>
-                    <option value="regular">Regular</option>
-                    <option value="malo">Malo</option>
-                </select>
-                <input type="text" name="observacion_calidad" placeholder="Observaciones">
-            </div>
-            <div class="input-group">
-                <label for="puenteo">Puenteo</label>
-                <select id="puenteo" name="puenteo">
-                    <option value="nuevo">Nuevo</option>
-                    <option value="antiguo">Antiguo</option>
-                    <option value="no_cuenta">No cuenta</option>
-                </select>
-                <input type="text" name="observacion_puenteo" placeholder="Observaciones">
-            </div>
-            <div class="input-group">
-                <label>Daño físico</label>
-                <input type="radio" id="danio_si" name="danio_fisico" value="si">
-                <label for="danio_si">Sí</label>
-                <input type="radio" id="danio_no" name="danio_fisico" value="no" checked>
-                <label for="danio_no">No</label>
-                <input type="text" name="observacion_danio" placeholder="Observaciones">
-            </div>
-            <div class="input-group">
-                <label for="valvulas">Válvulas</label>
-                <select id="valvulas" name="valvulas">
-                    <option value="llenas">Llenas</option>
-                    <option value="vacias">Vacías</option>
-                </select>
-                <input type="text" name="observacion_valvulas" placeholder="Observaciones">
-            </div>
-
-            <!-- Reemplazo de la tabla por divs con opciones desplegables -->
-            <div class="inspection-item">
-                <label for="tanque">Altura de Tanque</label>
-                <select id="tanque" name="tanque">
-                    <option value="bien">Bien</option>
-                    <option value="mal">Mal</option>
-                    <option value="no_aplica">No Aplica</option>
-                </select>
-                <input type="text" name="observacion_tanque" placeholder="Observaciones">
-            </div>
-            <div class="inspection-item">
-                <label for="bomba">Presión en la Bomba</label>
-                <select id="bomba" name="bomba">
-                    <option value="bien">Bien</option>
-                    <option value="mal">Mal</option>
-                    <option value="no_aplica">No Aplica</option>
-                </select>
-                <input type="text" name="observacion_bomba" placeholder="Observaciones">
-            </div>
-            <div class="inspection-item">
-                <label for="conexiones">Conexiones</label>
-                <select id="conexiones" name="conexiones">
-                    <option value="bien">Bien</option>
-                    <option value="mal">Mal</option>
-                    <option value="no_aplica">No Aplica</option>
-                </select>
-                <input type="text" name="observacion_conexiones" placeholder="Observaciones">
-            </div>
-            <div class="inspection-item">
-                <label for="neutralizador">Neutralizador</label>
-                <select id="neutralizador" name="neutralizador">
-                    <option value="bien">Bien</option>
-                    <option value="mal">Mal</option>
-                    <option value="no_aplica">No Aplica</option>
-                </select>
-                <input type="text" name="observacion_neutralizador" placeholder="Observaciones">
-            </div>
-            <div class="inspection-item">
-                <label for="tapones">Tapones</label>
-                <select id="tapones" name="tapones">
-                    <option value="bien">Bien</option>
-                    <option value="mal">Mal</option>
-                    <option value="no_aplica">No Aplica</option>
-                </select>
-                <input type="text" name="observacion_tapones" placeholder="Observaciones">
-            </div>
-            <div class="inspection-item">
-                <label for="etiquetas">Etiquetas informativas</label>
-                <select id="etiquetas" name="etiquetas">
-                    <option value="bien">Bien</option>
-                    <option value="mal">Mal</option>
-                    <option value="no_aplica">No Aplica</option>
-                </select>
-                <input type="text" name="observacion_etiquetas" placeholder="Observaciones">
-            </div>
+            <input type="text" name="observacion_calidad" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="calidad">Calidad</label>
+            <select id="calidad" name="calidad">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+            </select>
+            <input type="text" name="observacion_calidad" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="puenteo">Puenteo</label>
+            <select id="puenteo" name="puenteo">
+              <option value="nuevo">Nuevo</option>
+              <option value="antiguo">Antiguo</option>
+              <option value="no_cuenta">No cuenta</option>
+            </select>
+            <input type="text" name="observacion_puenteo" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label>Daño físico</label>
+            <input type="radio" id="danio_si" name="danio_fisico" value="si">
+            <label for="danio_si">Sí</label>
+            <input type="radio" id="danio_no" name="danio_fisico" value="no" checked>
+            <label for="danio_no">No</label>
+            <input type="text" name="observacion_danio" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="valvulas">Válvulas</label>
+            <select id="valvulas" name="valvulas">
+              <option value="llenas">Llenas</option>
+              <option value="vacias">Vacías</option>
+            </select>
+            <input type="text" name="observacion_valvulas" placeholder="Observaciones">
+          </div>
+          <div class="inspection-item">
+            <label for="tanque">Altura de Tanque</label>
+            <select id="tanque" name="tanque">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_tanque" placeholder="Observaciones">
+          </div>
+          <div class="inspection-item">
+            <label for="bomba">Presión en la Bomba</label>
+            <select id="bomba" name="bomba">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_bomba" placeholder="Observaciones">
+          </div>
+          <div class="inspection-item">
+            <label for="conexiones">Conexiones</label>
+            <select id="conexiones" name="conexiones">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_conexiones" placeholder="Observaciones">
+          </div>
+          <div class="inspection-item">
+            <label for="neutralizador">Neutralizador</label>
+            <select id="neutralizador" name="neutralizador">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_neutralizador" placeholder="Observaciones">
+          </div>
+          <div class="inspection-item">
+            <label for="tapones">Tapones</label>
+            <select id="tapones" name="tapones">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_tapones" placeholder="Observaciones">
+          </div>
+          <div class="inspection-item">
+            <label for="etiquetas">Etiquetas informativas</label>
+            <select id="etiquetas" name="etiquetas">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_etiquetas" placeholder="Observaciones">
+          </div>
         </div>
       </article>
 
       <article class="section">
-          <h2 onclick="toggleSection('diagrama')">Inspección de diagrama, mecanismo, escaner y ADF </h2>
-          <div id="diagrama" class="content">
-              <!-- Reemplazo de la tabla por divs con opciones desplegables -->
-              <div class="inspection-item">
-                  <label for="guias">Guías</label>
-                  <select id="guias" name="guias">
-                      <option value="bien">Bien</option>
-                      <option value="mal">Mal</option>
-                      <option value="no_aplica">No Aplica</option>
-                  </select>
-                  <input type="text" name="observacion_guias" placeholder="Observaciones">
-              </div>
-              <div class="inspection-item">
-                  <label for="conectores">Conectores</label>
-                  <select id="conectores" name="conectores">
-                      <option value="bien">Bien</option>
-                      <option value="mal">Mal</option>
-                      <option value="no_aplica">No Aplica</option>
-                  </select>
-                  <input type="text" name="observacion_conectores" placeholder="Observaciones">
-              </div>
-              <div class="inspection-item">
-                  <label for="cartuchos">Cartuchos</label>
-                  <select id="cartuchos" name="cartuchos">
-                      <option value="bien">Bien</option>
-                      <option value="mal">Mal</option>
-                      <option value="no_aplica">No Aplica</option>
-                  </select>
-                  <input type="text" name="observacion_cartuchos" placeholder="Observaciones">
-              </div>
-              <div class="inspection-item">
-                  <label for="mangueras">Mangueras</label>
-                  <select id="mangueras" name="mangueras">
-                      <option value="bien">Bien</option>
-                      <option value="mal">Mal</option>
-                      <option value="no_aplica">No Aplica</option>
-                  </select>
-                  <input type="text" name="observacion_mangueras" placeholder="Observaciones">
-              </div>
-              <div class="inspection-item">
-                  <label for="valvulas">Válvulas</label>
-                  <select id="valvulas" name="valvulas">
-                      <option value="bien">Bien</option>
-                      <option value="mal">Mal</option>
-                      <option value="no_aplica">No Aplica</option>
-                  </select>
-                  <input type="text" name="observacion_valvulas" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="pickup">Pick Up</label>
-                  <select id="pickup" name="pickup">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                  </select>
-                  <input type="text" name="observacion_pickup" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="separador">Separador</label>
-                  <select id="separador" name="separador">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                  </select>
-                  <input type="text" name="observacion_separador" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="duplexor">Duplexor</label>
-                  <select id="duplexor" name="duplexor">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                  </select>
-                  <input type="text" name="observacion_duplexor" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="carruaje">Carruaje</label>
-                  <select id="carruaje" name="carruaje">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                  </select>
-                  <input type="text" name="observacion_carruaje" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="guias">Guías Lineal y Circular</label>
-                  <select id="guias" name="guias">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                  </select>
-                  <input type="text" name="observacion_guias" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="engranajes">Engranajes</label>
-                  <select id="engranajes" name="engranajes">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                  </select>
-                  <input type="text" name="observacion_engranajes" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="rodillos">Rodillos</label>
-                  <select id="rodillos" name="rodillos">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                  </select>
-                  <input type="text" name="observacion_rodillos" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="gomas">Gomas</label>
-                  <select id="gomas" name="gomas">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                      <option value="no_aplica">No Aplica</option>
-                  </select>
-                  <input type="text" name="observacion_gomas" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="cama_plana">Cama Plana</label>
-                  <select id="cama_plana" name="cama_plana">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                      <option value="no_aplica">No Aplica</option>
-                  </select>
-                  <input type="text" name="observacion_cama_plana" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="calidad_escaner">Calidad de Escáner</label>
-                  <select id="calidad_escaner" name="calidad_escaner">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                      <option value="no_aplica">No Aplica</option>
-                  </select>
-                  <input type="text" name="observacion_calidad_escaner" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="lampara">Lámpara</label>
-                  <select id="lampara" name="lampara">
-                      <option value="bueno">Bueno</option>
-                      <option value="regular">Regular</option>
-                      <option value="malo">Malo</option>
-                      <option value="no_aplica">No Aplica</option>
-                  </select>
-                  <input type="text" name="observacion_lampara" placeholder="Observaciones">
-              </div>
+        <h2 onclick="toggleSection('diagrama')">Inspección de diagrama, mecanismo, escaner y ADF</h2>
+        <div id="diagrama" class="content">
+          <div class="inspection-item">
+            <label for="guias">Guías</label>
+            <select id="guias" name="guias">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_guias" placeholder="Observaciones">
           </div>
+          <div class="inspection-item">
+            <label for="conectores">Conectores</label>
+            <select id="conectores" name="conectores">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_conectores" placeholder="Observaciones">
+          </div>
+          <div class="inspection-item">
+            <label for="cartuchos">Cartuchos</label>
+            <select id="cartuchos" name="cartuchos">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_cartuchos" placeholder="Observaciones">
+          </div>
+          <div class="inspection-item">
+            <label for="mangueras">Mangueras</label>
+            <select id="mangueras" name="mangueras">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_mangueras" placeholder="Observaciones">
+          </div>
+          <div class="inspection-item">
+            <label for="valvulas">Válvulas</label>
+            <select id="valvulas" name="valvulas">
+              <option value="bien">Bien</option>
+              <option value="mal">Mal</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_valvulas" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="pickup">Pick Up</label>
+            <select id="pickup" name="pickup">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+            </select>
+            <input type="text" name="observacion_pickup" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="separador">Separador</label>
+            <select id="separador" name="separador">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+            </select>
+            <input type="text" name="observacion_separador" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="duplexor">Duplexor</label>
+            <select id="duplexor" name="duplexor">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+            </select>
+            <input type="text" name="observacion_duplexor" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="carruaje">Carruaje</label>
+            <select id="carruaje" name="carruaje">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+            </select>
+            <input type="text" name="observacion_carruaje" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="guias">Guías Lineal y Circular</label>
+            <select id="guias" name="guias">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+            </select>
+            <input type="text" name="observacion_guias" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="engranajes">Engranajes</label>
+            <select id="engranajes" name="engranajes">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+            </select>
+            <input type="text" name="observacion_engranajes" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="rodillos">Rodillos</label>
+            <select id="rodillos" name="rodillos">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+            </select>
+            <input type="text" name="observacion_rodillos" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="gomas">Gomas</label>
+            <select id="gomas" name="gomas">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_gomas" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="cama_plana">Cama Plana</label>
+            <select id="cama_plana" name="cama_plana">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_cama_plana" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="calidad_escaner">Calidad de Escáner</label>
+            <select id="calidad_escaner" name="calidad_escaner">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_calidad_escaner" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label for="lampara">Lámpara</label>
+            <select id="lampara" name="lampara">
+              <option value="bueno">Bueno</option>
+              <option value="regular">Regular</option>
+              <option value="malo">Malo</option>
+              <option value="no_aplica">No Aplica</option>
+            </select>
+            <input type="text" name="observacion_lampara" placeholder="Observaciones">
+          </div>
+        </div>
       </article>
 
       <article class="section">
-          <h2 onclick="toggleSection('configuracion')">Placa y configuración sistemática</h2>
-          <div id="configuracion" class="content">
-              <div class="input-group">
-                  <label>Deshabilitar actualización de firmware</label>
-                  <input type="radio" id="firmware_si" name="firmware" value="si" checked>
-                  <label for="firmware_si">Sí</label>
-                  <input type="radio" id="firmware_no" name="firmware" value="no">
-                  <label for="firmware_no">No</label>
-                  <input type="radio" id="firmware_no_aplica" name="firmware" value="no_aplica">
-                  <label for="firmware_no_aplica">No Aplica</label>
-                  <input type="text" name="observacion_firmware" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label for="contador">Contador actual</label>
-                  <input type="number" id="contador" name="contador">
-                  <input type="text" name="observacion_contador" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label>Configuración de preferencias (Idioma, región, fecha y hora)</label>
-                  <input type="radio" id="preferencias_si" name="preferencias" value="si" checked>
-                  <label for="preferencias_si">Sí</label>
-                  <input type="radio" id="preferencias_no" name="preferencias" value="no">
-                  <label for="preferencias_no">No</label>
-                  <input type="radio" id="preferencias_no_aplica" name="preferencias" value="no_aplica">
-                  <label for="preferencias_no_aplica">No Aplica</label>
-                  <input type="text" name="observacion_preferencias" placeholder="Observaciones">
-              </div>
-              <div class="input-group">
-                  <label>Verificación de funcionamiento (con cable de red, cable USB, WIFI)</label>
-                  <input type="radio" id="verificacion_si" name="verificacion" value="si" checked>
-                  <label for="verificacion_si">Sí</label>
-                  <input type="radio" id="verificacion_no" name="verificacion" value="no">
-                  <label for="verificacion_no">No</label>
-                  <input type="radio" id="verificacion_no_aplica" name="verificacion" value="no_aplica">
-                  <label for="verificacion_no_aplica">No Aplica</label>
-                  <input type="text" name="observacion_verificacion" placeholder="Observaciones">
-              </div>
-              <!-- Solución tecnológica con estilos consistentes -->
-              <div class="solution-group">
-                  <label for="solucion">Solución tecnológica</label>
-                  <select id="solucion" name="solucion">
-                      <option value="liberacion">Liberación</option>
-                      <option value="chip_autoreset">Chip autoreset</option>
-                      <option value="original">Original</option>
-                      <option value="key">Key</option>
-                      <option value="Puenteo">Puenteo</option>
-                      <option value="otros">Otros, detalle en observación</option>
-                  </select>
-                  <input type="text" name="observacion_solucion" placeholder="Observaciones">
-              </div>
+        <h2 onclick="toggleSection('configuracion')">Placa y configuración sistemática</h2>
+        <div id="configuracion" class="content">
+          <div class="input-group">
+            <label>Deshabilitar actualización de firmware</label>
+            <input type="radio" id="firmware_si" name="firmware" value="si" checked>
+            <label for="firmware_si">Sí</label>
+            <input type="radio" id="firmware_no" name="firmware" value="no">
+            <label for="firmware_no">No</label>
+            <input type="radio" id="firmware_no_aplica" name="firmware" value="no_aplica">
+            <label for="firmware_no_aplica">No Aplica</label>
+            <input type="text" name="observacion_firmware" placeholder="Observaciones">
           </div>
+          <div class="input-group">
+            <label for="contador">Contador actual</label>
+            <input type="number" id="contador" name="contador">
+            <input type="text" name="observacion_contador" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label>Configuración de preferencias (Idioma, región, fecha y hora)</label>
+            <input type="radio" id="preferencias_si" name="preferencias" value="si" checked>
+            <label for="preferencias_si">Sí</label>
+            <input type="radio" id="preferencias_no" name="preferencias" value="no">
+            <label for="preferencias_no">No</label>
+            <input type="radio" id="preferencias_no_aplica" name="preferencias" value="no_aplica">
+            <label for="preferencias_no_aplica">No Aplica</label>
+            <input type="text" name="observacion_preferencias" placeholder="Observaciones">
+          </div>
+          <div class="input-group">
+            <label>Verificación de funcionamiento (con cable de red, cable USB, WIFI)</label>
+            <input type="radio" id="verificacion_si" name="verificacion" value="si" checked>
+            <label for="verificacion_si">Sí</label>
+            <input type="radio" id="verificacion_no" name="verificacion" value="no">
+            <label for="verificacion_no">No</label>
+            <input type="radio" id="verificacion_no_aplica" name="verificacion" value="no_aplica">
+            <label for="verificacion_no_aplica">No Aplica</label>
+            <input type="text" name="observacion_verificacion" placeholder="Observaciones">
+          </div>
+          <div class="solution-group">
+            <label for="solucion">Solución tecnológica</label>
+            <select id="solucion" name="solucion">
+              <option value="liberacion">Liberación</option>
+              <option value="chip_autoreset">Chip autoreset</option>
+              <option value="original">Original</option>
+              <option value="key">Key</option>
+              <option value="Puenteo">Puenteo</option>
+              <option value="otros">Otros, detalle en observación</option>
+            </select>
+            <input type="text" name="observacion_solucion" placeholder="Observaciones">
+          </div>
+        </div>
       </article>
     </section>
 
     <button id="submitButton" class="submit-button" style="display: none;">Imprimir</button>
+    <!-- Botón para descargar el PDF -->
+    <button id="downloadPDFButton">Descargar PDF</button>
   </main>
 
   <script>
-    document.getElementById('editButton').addEventListener('click', function() {
-        document.getElementById('newFormContainer').style.display = 'block';
-    });
-
-    document.getElementById('addHistoryButton').addEventListener('click', function() {
-        document.getElementById('newFormContainer').style.display = 'block';
-    });
-
+    // Función para alternar secciones (para los encabezados con onclick)
     function toggleSection(sectionId) {
-        var section = document.getElementById(sectionId);
-        if (section.style.display === 'none' || section.style.display === '') {
-            section.style.display = 'block';
-        } else {
-            section.style.display = 'none';
-        }
+      var section = document.getElementById(sectionId);
+      section.style.display = section.style.display === 'none' || section.style.display === '' ? 'block' : 'none';
     }
+
+    // Mostrar formulario y botón de PDF al hacer clic en "Agregar Historial"
+    document.getElementById('addHistoryButton').addEventListener('click', function() {
+      // Mostrar el contenedor del formulario
+      document.getElementById('newFormContainer').style.display = 'block';
+      // Mostrar el botón de Descargar PDF
+      document.getElementById('downloadPDFButton').style.display = 'inline-block';
+    });
   </script>
 </body>
 </html>
