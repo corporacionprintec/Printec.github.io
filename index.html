@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=https://midominio/landing_page">
+    <script>
+        (function () {
+            var targetOrigin = 'https://importacionesprintec';
+            var targetPath = '/landing_page';
+            var current = new URL(window.location.href);
+            var target = targetOrigin.replace(/\/$/, '') + targetPath + current.search + current.hash;
+            window.location.replace(target);
+        })();
+    </script>
     <title>Grupo Printec</title>
     <link rel="icon" href="assets/images/logo_printec.svg">
     <link rel="stylesheet" href="styles.css">
