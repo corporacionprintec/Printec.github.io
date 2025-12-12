@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=https://importacionesprintec.com/landing_page">
     <script>
         (function () {
-            var targetOrigin = 'www.importacionesprintec.com';
-            var targetPath = '/landing_page';
+            var targetOrigin = 'https://importacionesprintec.com';
             var current = new URL(window.location.href);
+
+            // Si quieres mantener alguna página en GitHub Pages, ponla aquí.
+            // Ej: /inspeccion.html debe quedarse local (no redirigir).
+            var allowLocalPaths = ['/inspeccion.html'];
+            if (allowLocalPaths.indexOf(current.pathname) !== -1) return;
+
+            // Si vienes desde GH Pages normalmente es / o /index.html.
+            // Mandamos al landing de la app, pero preservamos query/hash.
+            var targetPath = '/landing_page';
             var target = targetOrigin.replace(/\/$/, '') + targetPath + current.search + current.hash;
             window.location.replace(target);
         })();
